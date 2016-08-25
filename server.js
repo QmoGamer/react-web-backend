@@ -50,7 +50,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 var basic = auth.basic({
         realm: "Simon Area."
     }, function (username, password, callback) { // Custom authentication method.
-        callback(username === "candy" && password === "candy");
+        callback(username === "qmo" && password === "qmo");
     }
 );
 app.use('/admin/*', auth.connect(basic));
