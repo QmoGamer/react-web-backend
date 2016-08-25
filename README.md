@@ -4,7 +4,7 @@
 2. npm start
 3. open up http://localhost:3000 
 
-# Beckend
+## Beckend
 
 1. edit server.js
 2. change your username && password
