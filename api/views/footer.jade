@@ -1,0 +1,92 @@
+extends layout
+
+block content
+
+	.row
+		.col-lg-12
+			h1(class="page-header")=title
+
+	.row
+		.col-lg-4
+			form(action="/admin/footers/create", method="post")
+				.form-group(class="alert alert-info", style="display: flex; align-items: center;")
+					label(style="width: 5em") 名稱
+					input(type="text", class="form-control", name="name")
+					label order 
+					- var n = 0
+					select(class="form-control", name="order", style="width: 30%;")
+						while n < 30
+							option(value=++n) #{n}						
+					button(type="submit", class="btn btn-outline btn-primary btn-sm")新增
+
+	.row
+		.col-lg-8
+			ul(style="list-style: none; padding: 0")
+				each footer_menu in footer_menus
+					li
+						.panel.panel-default
+							.panel-heading
+								h4(class="panel-title")
+									a(data-toggle="collapse", href="#collapse_"+footer_menu.id, class="btn btn-outline btn-info btn-sm", style="float: left;")展開
+									form(action="/admin/footers/update", method="post", class="form-group", style="display: flex; align-items: center; margin-bottom: 0;")
+										input(type="text", class="form-control", name="name", value=footer_menu.name)
+										|order 
+										- var n = 0
+										select(class="form-control", name="order")
+											while n < 30
+												option(value=++n selected=footer_menu.order == n) #{n}	
+										input(type="hidden", name="footer_menu_id", value=footer_menu.id)		
+										button(type="submit", class="btn btn-outline btn-success btn-sm")更新
+										a(href="/admin/footers/" + footer_menu.id + "/destroy", class="btn btn-danger btn-outline btn-sm", onclick="return confirm('確定刪除嗎?')")刪除
+
+							.panel-collapse.collapse.in(id="collapse_"+footer_menu.id)
+								.panel-body
+									form(action="/admin/footers/footer_second/create", method="post", class="form-group alert alert-info", style="display: flex; align-items: center;")
+										|&nbsp&nbsp
+										label(style="width: 4em") 名稱
+										input(type="text", class="form-control", name="name")
+										label order 
+										- var n = 0
+										select(class="form-control", name="order")
+											while n < 30
+												option(value=++n) #{n}
+										label 連結
+										select(class="form-control", name="is_url")
+											option(value=1)|是
+											option(value=0, selected)|否
+										label url
+										input(type="text", class="form-control", name="url")
+										label article
+										select(name="article_id", class="form-control")
+											option(value=0)請選擇  
+											each article in articles
+												option(value=article.id) #{article.name}	
+										input(type="hidden", name="footer_menu_id" value=footer_menu.id)											
+										button(type="submit", class="btn btn-outline btn-primary btn-sm")新增
+									ul(style="list-style: none; padding: 0")
+										each footer_second_menu in footer_menu.Footer_Second_Menus
+											li
+												form(action="/admin/footers/footer_second/update", method="post")
+													.form-group(style="display: flex; align-items: center;")
+														|&nbsp&nbsp
+														label(style="width: 5em") 名稱
+														input(type="text", class="form-control", name="name", value=footer_second_menu.name)
+														label order 
+														- var n = 0
+														select(class="form-control", name="order")
+															while n < 30
+																option(value=++n selected=footer_second_menu.order == n) #{n}
+														label 連結
+														select(class="form-control", name="is_url")
+															option(value=1 selected=footer_second_menu.is_url==1)|是
+															option(value=0 selected=footer_second_menu.is_url==0)|否
+														label url
+														input(type="text", class="form-control", name="url", value=footer_second_menu.url)
+														label article
+														select(name="article_id", class="form-control")
+															option(value=0)請選擇  
+															each article in articles
+																option(value=article.id selected=footer_second_menu.ArticleId==article.id) #{article.name}	
+														input(type="hidden", name="footer_second_menu_id", value=footer_second_menu.id)
+														button(type="submit", class="btn btn-outline btn-success btn-sm")更新
+														a(href="/admin/footers/footer_second/"+footer_second_menu.id+"/destroy", class="btn btn-danger btn-outline btn-sm", onclick="return confirm('確定刪除嗎?')")刪除

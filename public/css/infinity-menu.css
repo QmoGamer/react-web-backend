@@ -1,0 +1,76 @@
+.infinity-menu-node-container {
+	width: 100%;
+	background-color: rgb(137, 139, 143);
+	color: rgb(255, 255, 255);
+	padding: 0.5em;
+	border-bottom: solid 1px rgb(73, 73, 73);
+}
+
+.infinity-menu-node-container:after{
+	content: "▼";
+	color: white;
+	float: right;
+	line-height: 2;
+	font-size: 0.8em;
+}
+
+.infinity-menu-node-container:hover {
+	/*background-color: rgb(73, 73, 73);*/
+}
+
+.infinity-menu-leaf-container {
+	width: 100%;
+	background-color: rgb(94, 96, 99);
+	color: rgb(255, 255, 255);
+	padding: 0.5em;
+	border-bottom: solid 1px rgb(73, 73 ,73);
+}
+
+.infinity-menu-leaf-container:hover {
+	/*background-color: rgb(73, 73, 73);*/
+}
+
+.react-infinity-menu-default-search-input {
+	display: none;
+}
+
+.infinity-menu-display-tree-container * {
+	margin: 0;
+	padding: 0.8em 0em;
+  background-color: #000;
+  list-style-type: none; 
+  color: #fff;
+	text-indent: 0.5em;
+}
+
+.infinity-menu-display-tree-container .infinity-menu-node-container+ul {
+	padding: 0em;
+}
+
+.infinity-menu-display-tree-container .infinity-menu-node-container+ul * {
+	background-color: #353535;
+}
+
+.infinity-menu-display-tree-container .infinity-menu-node-container+ul .infinity-menu-node-container+ul * {
+	background-color: #1F3742;
+}
+
+#page-wrap {
+	overflow: auto;
+}
+
+#page-wrap div label {
+	display: initial;
+}
+
+.bm-overlay {
+	background-color: #000 !important;
+}
+
+.bm-menu {
+	padding: 0 !important;
+}
+
+.bm-cross {
+	display: none;
+}

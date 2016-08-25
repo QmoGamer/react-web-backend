@@ -1,0 +1,9 @@
+	script(src='/js/markdown.min.js')
+	textarea id='txt'
+	div id='preview'
+	div id='markdown'
+	script.
+		document.querySelector('#txt').onchange = function(){
+			document.querySelector('#preview').innerHTML = markdown.toHTML( document.querySelector('#txt').value );
+		}
+	

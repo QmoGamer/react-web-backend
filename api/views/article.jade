@@ -1,0 +1,65 @@
+extends layout
+
+block content
+
+	link(rel='stylesheet', href='/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css')
+	link(rel='stylesheet', href='/bower_components/datatables-responsive/css/responsive.dataTables.scss')
+
+	<!-- Custom CSS -->
+	link(rel='stylesheet', href='/dist/css/sb-admin-2.css')
+
+	script(type='text/javascript' src='/bower_components/datatables/media/js/jquery.dataTables.min.js')
+	script(type='text/javascript' src='/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js')
+
+	<!-- Custom Theme JavaScript -->
+	script(type='text/javascript' src='/dist/js/sb-admin-2.js')
+
+	.row
+		.col-lg-12
+			h1(class="page-header")=title
+
+	.row
+		.col-lg-4
+			.panel.panel-info
+				.panel-heading
+					h4(class="panel-title")
+						a(data-toggle="collapse", href="#collapseAdd", class="btn btn-outline btn-primary btn-sm")新增
+				#collapseAdd.panel-collapse.collapse
+					.panel-body
+						form(action="/admin/articles/create", method="post")
+							label name
+							input(type="text", class="form-control", name="name")
+							br
+							button(type="submit", class="btn btn-outline btn-success btn-sm")確定
+
+	.row
+		.col-lg-8
+			.panel.panel-default
+				.panel-heading banner_list					
+				.panel-body
+					.dataTable_wrapper
+						table(id="article_table", class="table table-striped table-bordered table-hover")
+							thead
+								tr
+									th id
+									th name
+									th(style="width: 5em") 編輯
+							tbody
+								each article in articles
+									tr
+										td
+											=article.id
+										td 
+											=article.name
+										td 
+											a(href="/admin/articles/"+article.id, class="btn btn-outline btn-success btn-sm")
+												i(class="fa fa-edit")
+											a(href="/admin/articles/"+article.id+"/destroy", class="btn btn-outline btn-danger btn-sm", onclick="return confirm('確定刪除嗎?')")
+												i(class="fa fa-trash-o")
+
+	script.
+		$(document).ready(function() {
+			$('#article_table').DataTable({
+				"order": [[ 0, "desc" ]]
+			});
+		});

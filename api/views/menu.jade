@@ -1,0 +1,227 @@
+extends layout
+
+block content
+
+	style.
+		label {
+			white-space: nowrap;
+		}
+
+	.row
+		.col-lg-12
+			h1(class="page-header")=title
+
+	.row
+		.col-lg-12
+			form(action="/admin/menus/create", method="post", class="form-group alert alert-info", style="display: flex; align-items: center; background-color: #ffcccc;")
+				label name 
+				input(type="text", class="form-control", name="name")
+				label banner 
+				select(name="banner_id", class="form-control")
+					option(value=0)請選擇
+					each banner in banners
+						if(banner.category==1)
+							option(value=banner.id) #{banner.name}
+				label 文章 
+				select(name="article_id", class="form-control")
+					option(value=0)請選擇  
+					each article in articles
+						if(article.category==1)
+							option(value=article.id) #{article.name}
+				label 類別 
+				select(name="component", class="form-control")
+					option(value="null")|請選擇 
+					option(value="product" selected)|product 
+					option(value="activity")|activity 
+					option(value="url")|url 
+					option(value="course")|course
+				label 類型 
+				select(name="customComponent", class="form-control")
+					option(value="container")|請選擇
+					option(value="leaf")|leaf
+					option(value="url")|url
+				label 課程 
+				select(name="course_id", class="form-control")
+					option(value=0)請選擇  
+					each course in courses
+						option(value=course.id) #{course.name}  
+				label url 
+				input(type="text", class="form-control", name="url")
+				label 排序 
+				- var n = 0
+				select(name="order", class="form-control", style="width: 5em")
+					while n < 30
+						option(value=++n) #{n}
+				input(type="submit", class="btn btn-primary btn-outline btn-sm", value="新增")
+
+	.row
+		.col-lg-12
+			each menu in menus
+				if menu.MenuId == null
+					.panel.panel-default
+						.panel-heading(style="background-color: #ffcccc;")
+							h4(class="panel-title")
+								a(data-toggle="collapse", href="#collapse_"+menu.id, class="btn btn-outline btn-info btn-sm", style="float: left;")展開		
+								b
+									span(style="color: #E94F37;", id=menu.id)
+										=menu.name
+									span(style="margin: 1em;")
+										|order-
+										=menu.order 
+								a(href="/admin/menus/"+menu.id, class="btn btn-success btn-outline btn-sm")編輯
+								a(href="/admin/menus/"+menu.id+"/destroy", class="btn btn-danger btn-outline btn-sm", onclick="return confirm('確定刪除嗎?')")刪除
+						.panel-collapse.collapse.in(id="collapse_"+menu.id)
+							.panel-body								
+								form(action="/admin/menus/create", method="post", class="form-group alert alert-info", style="display: flex; align-items: center; background-color: #eeffee;")
+									label name 
+									input(type="text", class="form-control", name="name")
+									label banner 
+									select(name="banner_id", class="form-control")
+										option(value=0)請選擇
+										each banner in banners
+											if(banner.category==2)
+												option(value=banner.id) #{banner.name}
+									label 文章 
+									select(name="article_id", class="form-control")
+										option(value=0)請選擇  
+										each article in articles
+											if(article.category==2)
+												option(value=article.id) #{article.name}  
+									label 類別 
+									select(name="component", class="form-control")
+										option(value="null")|請選擇 
+										option(value="product" selected)|product 
+										option(value="activity")|activity 
+										option(value="url")|url
+										option(value="course")|course
+									label 類型 
+									select(name="customComponent", class="form-control")
+										option(value="container")|請選擇
+										option(value="leaf")|leaf
+										option(value="url")|url
+									label 課程 
+									select(name="course_id", class="form-control")
+										option(value=0)請選擇  
+										each course in courses
+											option(value=course.id) #{course.name}
+									label url 
+									input(type="text", class="form-control", name="url")
+									label order 
+									- var n = 0
+									select(name="order", class="form-control", style="width: 5em")
+										while n < 30
+											option(value=++n) #{n}
+									input(type="hidden", name="menu_id", value=menu.id)
+									input(type="submit", class="btn btn-primary btn-outline btn-sm", value="新增")
+								each second_menu in menus									
+									if second_menu.MenuId == menu.id
+										.panel.panel-default
+											.panel-heading(style="background-color: #eeffee;")
+												h4(class="panel-title")
+													a(data-toggle="collapse", href="#collapse_second_"+second_menu.id, class="btn btn-outline btn-info btn-sm", style="float: left;")展開
+													b
+														span(style="color: #44BBA4;", id=second_menu.id)													
+															=second_menu.name
+														span(style="margin: 1em;")
+															|order-
+															=second_menu.order
+													a(href="/admin/menus/"+second_menu.id, class="btn btn-success btn-outline btn-sm")編輯
+													a(href="/admin/menus/"+second_menu.id+"/destroy", class="btn btn-danger btn-outline btn-sm", onclick="return confirm('確定刪除嗎?')")刪除
+											.panel-collapse.collapse.in(id="collapse_second_"+second_menu.id)
+												.panel-body
+													form(action="/admin/menus/create", method="post", class="form-group alert alert-info", style="display: flex; align-items: center;")
+														label name 
+														input(type="text", class="form-control", name="name")
+														label banner 
+														select(name="banner_id", class="form-control")
+															option(value=0)請選擇
+															each banner in banners
+																if(banner.category==3)
+																	option(value=banner.id) #{banner.name}
+														label 文章 
+														select(name="article_id", class="form-control")
+															option(value=0)請選擇  
+															each article in articles
+																if(article.category==3)
+																	option(value=article.id) #{article.name}  
+														label 類別 
+														select(name="component", class="form-control")
+															option(value="null")|請選擇 
+															option(value="product" selected)|product 
+															option(value="activity")|activity 
+															option(value="url")|url
+															option(value="course")|course
+														label 類型 
+														select(name="customComponent", class="form-control")
+															option(value="container")|請選擇
+															option(value="leaf")|leaf
+															option(value="url")|url
+														label 課程 
+														select(name="course_id", class="form-control")
+															option(value=0)請選擇  
+															each course in courses
+																option(value=course.id) #{course.name}  
+														label url 
+														input(type="text", class="form-control", name="url")
+														label order 
+														- var n = 0
+														select(name="order", class="form-control", style="width: 5em")
+															while n < 30
+																option(value=++n) #{n}
+														input(type="hidden", name="menu_id", value=second_menu.id)
+														input(type="submit", class="btn btn-primary btn-outline btn-sm", value="新增")
+													ul														
+														each third_menu in menus
+															if third_menu.MenuId == second_menu.id
+																li
+																	b
+																		span(style="color: #3F88C5;", id=third_menu.id)
+																			=third_menu.name 
+																		span(style="margin: 1em;")
+																			|order-
+																			=third_menu.order
+																	a(href="/admin/menus/"+third_menu.id, class="btn btn-success btn-outline btn-sm")編輯
+																	a(href="/admin/menus/"+third_menu.id+"/destroy", class="btn btn-danger btn-outline btn-sm", onclick="return confirm('確定刪除嗎?')")刪除
+
+	.row
+		.col-lg-12
+			.panel.panel-default
+				.panel-heading
+					|menu list
+				.panel-body
+					ul
+						each menu in menus
+							if menu.MenuId == null
+								li
+									b
+										span(style="color: #E94F37;")
+											=menu.name
+										span(style="margin: 1em;")
+											|order-
+											=menu.order 
+									a(href="/admin/menus/"+menu.id, class="btn btn-success btn-outline btn-sm")編輯
+									a(href="/admin/menus/"+menu.id+"/destroy", class="btn btn-danger btn-outline btn-sm", onclick="return confirm('確定刪除嗎?')")刪除
+									ul
+										each second_menu in menus
+											if second_menu.MenuId == menu.id
+												li
+													b
+														span(style="color: #44BBA4;")													
+															=second_menu.name
+														span(style="margin: 1em;")
+															|order-
+															=second_menu.order
+													a(href="/admin/menus/"+second_menu.id, class="btn btn-success btn-outline btn-sm")編輯
+													a(href="/admin/menus/"+second_menu.id+"/destroy", class="btn btn-danger btn-outline btn-sm")刪除				
+													ul
+														each third_menu in menus
+															if third_menu.MenuId == second_menu.id
+																li
+																	b
+																		span(style="color: #3F88C5;")
+																			=third_menu.name 
+																		span(style="margin: 1em;")
+																			|order-
+																			=third_menu.order
+																	a(href="/admin/menus/"+third_menu.id, class="btn btn-success btn-outline btn-sm")編輯
+																	a(href="/admin/menus/"+third_menu.id+"/destroy", class="btn btn-danger btn-outline btn-sm")刪除

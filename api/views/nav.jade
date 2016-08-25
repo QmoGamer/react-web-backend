@@ -1,0 +1,54 @@
+block nav
+
+	nav(class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0")
+		.navbar-header
+			button(type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse")
+				span(class="sr-only") |Toggle navigation
+				span(class="icon-bar")
+				span(class="icon-bar")
+				span(class="icon-bar")
+			a(class="navbar-brand" href="/admin") Qmo Admin
+
+		.navbar-default.sidebar(role="navigation")
+			.sidebar-nav.navbar-collapse
+				ul(class="nav" id="side-menu")					
+					li
+						a(href="/admin/articles")
+							i(class="fa fa-dashboard fa-fw")
+							|&nbsp 文章列表
+					li
+						a(href="/admin/banners")
+							i(class="fa fa-dashboard fa-fw")
+							|&nbsp 圖片橫幅
+					li
+						a(href="/admin/menus")
+							i(class="fa fa-dashboard fa-fw")
+							|&nbsp 主選單
+					li
+						a(href="/admin/footers")
+							i(class="fa fa-dashboard fa-fw")
+							|&nbsp 副選單
+					li
+						a(href="/admin/configs")
+							i(class="fa fa-dashboard fa-fw")
+							|&nbsp 設定
+					li
+						a(href="/admin/members")
+							i(class="fa fa-dashboard fa-fw")
+							|&nbsp 會員列表
+					li
+						a(href="/admin/courses")
+							i(class="fa fa-dashboard fa-fw")
+							|&nbsp 課程列表
+					li
+						a(href="/admin/activitys")
+							i(class="fa fa-dashboard fa-fw")
+							|&nbsp 活動列表
+					li
+						a(href="/admin/home_ads")
+							i(class="fa fa-dashboard fa-fw")
+							|&nbsp 首頁廣告
+					li
+						a(href="/admin/industrys")
+							i(class="fa fa-dashboard fa-fw")
+							|&nbsp 產業類別

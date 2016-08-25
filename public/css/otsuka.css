@@ -1,0 +1,285 @@
+﻿body{
+	padding-top: 4.5em;
+}
+
+.carousel .left {
+	position: absolute;
+	left: 8%;
+	top: 25%;
+	background-color: yellow;
+}
+.carousel .center {
+	position: absolute;
+	left: 35%;
+	top: 25%;
+	background-color: yellow;
+}
+.carousel .right {
+	position: absolute;
+	right: 22%;
+	top: 25%;
+	background-color: yellow;
+}
+
+a {
+	text-decoration: none !important;
+}
+
+.menu_sub_style {
+	/*height: 30px;
+	line-height: 30px;
+	font-size: 10px;
+	top: 8.8em;
+	z-index: 5;*/
+	width: 100%;	
+}
+.menu_sub_style a{
+	font-size: 0.8em;
+	padding: 0em 1em;
+}
+
+.submenu{
+	margin-left:1em;
+	width:100%;
+	font-size: 12px;
+}
+
+.html_width_space {
+	width: 80%;
+	margin: 0 auto;
+}
+
+.footer_style {
+	width: 8.5em;
+	padding: 1% 2% 1% 0%;
+}
+
+.footer_item_style:hover * {
+	color: #fff !important;
+}
+
+.menu_row {
+	height: 1.5em;
+	display: flex;
+	flex-direction: row;
+}
+.first_row, .second_row, .third_row {
+	display: block;
+	padding: 0em 1em;
+  height: 1.5em;
+  cursor: pointer;
+}
+.menu_row > .first_row:hover {
+	background-color: #000;
+}
+.menu_row > .second_row:hover > * {
+	color: #fff;
+}
+.menu_row > .third_row:hover {
+	background-color: #000;
+}
+
+.bg_img, .ad_img {
+	max-width: 100%; 
+	min-width: 100%;
+	height: auto;
+	vertical-align: middle;
+}
+
+.banner_text {
+	position: absolute;
+  width: 100%;
+}
+		
+.second_menu_row ul {
+	display: flex;
+	flex-direction: row;
+}
+
+.third_menu_row ul {
+	display: flex;
+	flex-direction: row;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.third_menu_row ul a {
+	font-size: 0.8em;
+	padding: 0em 1em;
+}
+
+.copyright_border {
+	color: #e2e2e2; 
+	border-top: #5A5757 1px solid;
+	padding: 0.5em 0em;
+}
+
+.small_font_size {
+	font-size: 14px;
+}
+
+.flex_center_center {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.language_link {
+	color: #777;
+	margin-left: 1em;
+}
+
+.form_member > div {
+	margin: 1.5em auto 0 auto;
+	width: 30%;
+}
+
+.test_width {
+	width: 45em;
+}
+
+.help-block {
+	font-size: 0.8em;
+	text-align: center;
+}
+
+.underline-type1 {
+	border-top: 1px #000 solid;
+	margin: 2em 15em;
+}
+
+.table_td_type1 {
+	word-break: break-all;
+	width: 20%;
+	padding: 0.5em;
+	text-align: center;
+	border-bottom: #ADADAD 1px solid;
+	border-right: #ADADAD 1px solid;
+}
+
+.ad_img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.valid_field {
+	font-size: 0.8em;
+	color: red;
+}
+
+.home_ads_g {
+	margin: 0 10vw;
+}
+
+.terms {
+	margin: 4em 25vw;
+}
+
+.blue_font_type {
+	color: #4285f4;
+	font-size: 1.2em;
+}
+
+.pure-menu * {
+	font-weight: normal;
+}
+
+@media screen and (max-width: 767px) {
+	.pure-menu.pure-menu-fixed.pure-menu-horizontal {
+    	padding-right: 3em;    
+	}
+
+	body{
+		padding-top:3em;
+		font-size: 16px;
+	}
+
+	#page{
+		padding-top: 0 !important;
+	}
+
+	#footer {
+		padding-left: 2em !important;
+	}
+
+	#footer > div > div {
+		display: block !important;
+	}
+
+	.pure-menu-horizontal > .html_width_space {
+		width: 100%;
+	}	
+
+	.banner_text {
+    position: static;
+    margin: 2em 0;
+  	text-align: center;
+	}
+
+	.language_link {
+		font-size: 0.8em;
+		margin-left: 0.5em;
+	}
+
+	.form_member > div {
+		width: 80%;
+	}
+
+	.underline-type1 {
+		border-top: 1px #000 solid;
+		margin: 2em;
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	.test_width {
+		width: 100%;
+	}
+
+	.html_width_space {
+		width: 95%;
+	}
+
+	.banner_text, .ad_text {
+		font-size: 12px;
+	}
+
+	.home_ads_g {
+		margin: 0 auto;
+	}
+
+	.terms {
+		margin: 4em;
+	}
+}
+
+.anchor {
+  padding-top: 7em !important; /* fixed header height*/
+  margin-top: -7em !important; /* negative fixed header height */
+}
+
+.select_type_1 {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+input[name="is_buy"] {
+	-webkit-appearance: checkbox; /* Chrome, Safari, Opera */
+	-moz-appearance: checkbox;    /* Firefox */
+	-ms-appearance: checkbox;     /* not currently supported */
+}

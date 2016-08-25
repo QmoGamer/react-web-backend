@@ -1,0 +1,99 @@
+extends layout
+
+block content
+
+	style.
+		.form-group input, .form-group select {
+			margin: auto;
+		}
+
+	.row
+		.col-lg-12
+			h1(class="page-header")=title
+				a(href="/admin/menus", class="btn btn-warning") back
+
+	.row
+		.col-lg-3
+			.panel.panel-default
+				.panel-heading
+					|menu detail
+				.panel-body
+					form(action="/admin/menus/update", method="post", class="form-group")
+						label name 
+						input(type="text", class="form-control", name="name", value=menu.name)
+						label 廣告橫幅 
+						div(style="margin-left: 2em")
+							label 選擇分類
+							select(class="form-control", onChange="changeBannerCategory(this.value)")
+								option(value="0")|請選擇分類
+								option(value="1")|第一層主選單
+								option(value="2")|第二層主選單
+								option(value="3")|第三層主選單
+								option(value="7")|其它
+							label 選擇banner
+							select(id="banner_id", name="banner_id", class="form-control")
+								option(value=0)請選擇
+								each banner in banners
+									option(class="banner_category banner_category_"+banner.category, value=banner.id, selected=menu.BannerId == banner.id) #{banner.name}
+						label 文章 
+						div(style="margin-left: 2em")
+							label 選擇分類
+							select(class="form-control", onChange="changeArticleCategory(this.value)")
+								option(value="0")|請選擇分類
+								option(value="1")|第一層主選單
+								option(value="2")|第二層主選單
+								option(value="3")|第三層主選單
+								option(value="7")|其它
+							label 選擇article
+							select(id="article_id", name="article_id", class="form-control")
+								option(value=0)請選擇  
+								each article in articles
+									option(class="article_category article_category_"+article.category, value=article.id, selected=menu.ArticleId == article.id) #{article.name}  
+						label 類型 
+						select(name="component", class="form-control")
+							option(value="null")|請選擇 
+							option(value="product", selected=menu.component == "product")|product 
+							option(value="activity", selected=menu.component == "activity")|activity 
+							option(value="url", selected=menu.component == "url")|url
+							option(value="course", selected=menu.component == "course")|course 
+						label 類別 
+						select(name="customComponent", class="form-control")
+							option(value="container")|請選擇
+							option(value="leaf", selected=menu.customComponent == "leaf")|leaf
+							option(value="url", selected=menu.customComponent == "url")|url
+						label 課程 
+						select(name="course_id", class="form-control")
+							option(value=0)請選擇  
+							each course in courses
+								option(value=course.id, selected=menu.CourseId == course.id) #{course.name}  
+						label url 
+						input(type="text", name="url", value=menu.url, class="form-control")
+						label order 
+						- var n = 0
+						select(name="order", class="form-control")
+							while n < 30
+								option(value=++n, selected=menu.order == n) #{n}
+						br
+						input(type="hidden", name="id", value=menu.id)
+						input(type="submit", class="btn btn-success btn-outline", value="編輯完成")
+
+	script.
+		function changeArticleCategory(x) {
+			document.getElementById('article_id').value = 0;
+			var elems_hide = document.getElementsByClassName("article_category");
+			for(i = 0; i < elems_hide.length; i++)
+				elems_hide[i].style.display = 'none';
+			var elems_show = document.getElementsByClassName("article_category_"+x);
+			for(i = 0; i < elems_show.length; i++)
+				elems_show[i].style.display = 'block';
+		}
+
+		function changeBannerCategory(x) {
+			document.getElementById('banner_id').value = 0;
+			var elems_hide = document.getElementsByClassName("banner_category");
+			for(i = 0; i < elems_hide.length; i++)
+				elems_hide[i].style.display = 'none';
+			var elems_show = document.getElementsByClassName("banner_category_"+x);
+			for(i = 0; i < elems_show.length; i++)
+				elems_show[i].style.display = 'block';
+		}

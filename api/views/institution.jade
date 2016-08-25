@@ -1,0 +1,25 @@
+extends layout
+
+block content
+
+	style.
+		label {
+			margin-top: 5px;
+		}
+
+	.row
+		.col-lg-12
+			h1(class="page-header")=title
+
+	.row
+		.col-lg-3
+			form(action="/admin/institutions/create", method="post", class="form-group alert alert-info", style="display: flex; align-items: center;")
+				label option
+				input(type="text", class="form-control", name="option")
+				button(type="submit", class="btn btn-outline btn-primary btn-sm")新增			
+			ul
+				each institution in institutions
+					li
+						label
+							span(style="color: #000")=institution.option
+						a(href="/admin/institutions/"+institution.id+"/destroy", class="btn btn-danger btn-sm", style="margin-left: 2em")刪除

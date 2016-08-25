@@ -1,0 +1,62 @@
+extends layout
+
+block content
+
+	.row
+		.col-lg-12
+			h1(class="page-header")=title
+				a(href="/admin/courses", class="btn btn-warning") back
+
+	.row
+		.col-lg-4
+			form(action="/admin/courses/course_details/update", method="post", class="form-group")
+				label name
+				input(type="text", class="form-control", name="name", value=course_detail.name)
+				label area
+				input(type="text", class="form-control", name="area", value=course_detail.area)
+				label course_date
+				input(type="text", class="form-control", name="course_date", value=course_detail.course_date)
+				label course_time
+				input(type="text", class="form-control", name="course_time", value=course_detail.course_time)
+				label google_url
+				input(type="text", class="form-control", name="google_url", value=course_detail.google_url)
+				label 人數上限							
+				input(type="number", class="form-control", name="number_of_people", min="0", max="1000" value=course_detail.number_of_people)				
+				input(type="hidden" name="course_detail_id" value=course_detail.id)
+				input(type="submit", class="btn btn-success btn-outline" style="margin: 1em", value="更新")
+		.col-lg-1
+		.col-lg-6
+			.panel.panel-default
+				.panel-heading(style="display: flex; justify-content: space-between; align-items: center;") member list
+					form(action="/admin/courses/course_details/csv", method="post")
+						input(type="hidden" name="course_detail_id" value=course_detail.id)
+						input(type="submit", class="btn btn-info btn-outline" style="margin: 1em", value="匯出")
+				.panel-body
+					.table-responsive
+						table(class="table")
+							thead
+								tr
+									th #
+									th 公司
+									th 姓名
+									th 電話
+									th 信箱
+							tbody				
+								- var n = 1
+								each member in members
+									tr
+										td
+											label
+												=n++
+										td 
+											label 
+												=member.company_name
+										td
+											label
+												=member.name
+										td
+											label
+												=member.phone
+										td
+											label
+												=member.email

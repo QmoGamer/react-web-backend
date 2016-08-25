@@ -1,0 +1,36 @@
+extends layout
+
+block content
+
+	.row
+		.col-lg-12
+			h1(class="page-header")=title
+
+	.row
+		.col-lg-8
+			form(action="/admin/configs/create", method="post")
+				.form-group(class="alert alert-info", style="display: flex; align-items: center;")
+					label name 
+					input(type="text", class="form-control", name="name")
+					label value 
+					input(type="text", class="form-control", name="value")
+					button(type="submit", class="btn btn-outline btn-primary btn-sm")新增
+
+	.row
+		.col-lg-9
+			.panel.panel-default
+				.panel-heading config list
+				.panel-body
+					ul(style="list-style: none; padding: 0")
+						each config in configs
+							li				
+								form(action="/admin/configs/update", method="post")			
+									.form-group(style="display: flex; align-items: center;")
+										|&nbsp&nbsp
+										label name
+										input(type="text", class="form-control", name="name", value=config.name, disabled)
+										label value
+										input(type="text", class="form-control", name="value" value=config.value)
+										input(type="hidden" name="config_id" value=config.id)
+										button(type="submit", class="btn btn-outline btn-success btn-sm")更新
+										a(href="/admin/configs/" + config.id + "/destroy", class="btn btn-danger btn-outline btn-sm", onclick="return confirm('確定刪除嗎?')")刪除

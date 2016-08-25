@@ -1,0 +1,68 @@
+doctype html
+html
+	head
+		title= title
+
+		link(rel='stylesheet', href='/stylesheets/style.css') 
+		link(rel='stylesheet', href='/css/slick.css')
+		link(rel='stylesheet', href='/css/pure.css')
+		link(rel='stylesheet', href='/css/animate.css')
+		link(rel='stylesheet', href='/css/grids.css')  
+		link(rel='stylesheet', href='/css/index.css')  
+		link(rel='stylesheet', href='/css/otsuka.css')
+		link(rel='stylesheet', href='/css/infinity-menu.css')
+		link(rel='stylesheet', href='/css/codemirror.css')
+		
+		<!-- Bootstrap Core CSS -->
+		link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
+
+		<!-- MetisMenu CSS -->
+		link(rel='stylesheet', href='/bower_components/metisMenu/dist/metisMenu.min.css')
+
+		<!-- Timeline CSS -->
+		link(rel='stylesheet', href='/dist/css/timeline.css')
+
+		<!-- Custom CSS -->
+		link(rel='stylesheet', href='/dist/css/sb-admin-2.css')
+
+		<!-- Custom Fonts -->
+		link(rel='stylesheet', href='/bower_components/font-awesome/css/font-awesome.min.css')
+
+		script(type='text/javascript' src='/js/markdown.min.js')
+		script(type='text/javascript' src='/js/codemirror.js')
+		<!-- jQuery -->
+		script(type='text/javascript' src='/bower_components/jquery/dist/jquery.min.js')
+
+		<!-- Bootstrap Core JavaScript -->
+		script(type='text/javascript' src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
+
+		<!-- Metis Menu Plugin JavaScript -->
+		script(type='text/javascript' src='/bower_components/metisMenu/dist/metisMenu.min.js')
+
+		<!-- Custom Theme JavaScript -->
+		script(type='text/javascript' src='/dist/js/sb-admin-2.js')
+
+		style.
+			body {
+				margin: 0;
+				padding: 0;
+			}
+			.form-group input, .form-group select {
+				margin: 0 1em;
+			}
+			.alert {
+				padding: 5px 15px;
+			}
+			.btn {
+				margin: 5px;
+			}			
+			label {
+				white-space: nowrap;
+			}
+
+	body
+		#wrapper
+			include nav
+
+			#page-wrapper
+				block content

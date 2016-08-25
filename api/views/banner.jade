@@ -1,0 +1,110 @@
+extends layout
+
+block content
+
+	style.
+		label {
+			margin-top: 5px;
+		}
+
+	.row
+		.col-lg-12
+			h1(class="page-header")=title
+				a(href="/admin/banners", class="btn btn-warning") back
+
+	.row
+		.col-lg-8
+			form(action="/admin/banners/update", method="post", oninput="text_top_value.value=text_top.value, text_left_value.value=text_left.value")
+				.col-lg-4
+					label name 
+					input(type="text", class="form-control", name="name" value=banner.name)
+				.col-lg-4
+					label 連結 
+					input(type="text", class="form-control", name="url" value=banner.url)
+				.col-lg-4
+					label 分類
+					select(class="form-control", name="category")
+						option(value="7" selected)|其它
+						option(value="1" selected=banner.category == "1")|第一層主選單
+						option(value="2" selected=banner.category == "2")|第二層主選單
+						option(value="3" selected=banner.category == "3")|第三層主選單
+						option(value="6" selected=banner.category == "6")|活動用
+				.col-lg-3
+					label 類別 
+					select(name="type", class="form-control")
+						option(value="home" selected=banner.type == "home")|home 
+						option(value="activity" selected=banner.type == "activity")|activity 
+						option(value="product" selected=banner.type == "product")|product
+						option(value="hide" selected=banner.type == "hide")|不顯示
+				.col-lg-3
+					label 排序
+					- var n = 0
+					select(name="order", class="form-control")
+						while n < 30
+							option(value=++n, selected=banner.order == n) #{n}
+				.col-lg-3						
+					label 文字上下坐標							
+					input(id="text_top", type="range", class="form-control", name="text_top", min="0", max="100" value=banner.text_top)
+					b
+						output(name="text_top_value", style="color: red")=banner.text_top
+				.col-lg-3
+					label 文字左右坐標							
+					input(id="text_left", type="range", class="form-control", name="text_left", min="0", max="100" value=banner.text_left)
+					b
+						output(name="text_left_value", style="color: red")=banner.text_left
+				br
+				label text
+				textarea(id="content", name="text", class="form-control")=banner.text
+				br
+				input(type="hidden" name="banner_id" value=banner.id)
+				button(type="submit", class="btn btn-outline btn-success")更新
+			br
+
+	.row
+		.col-lg-6
+			form(action="/admin/banners/update_img", method="post", enctype="multipart/form-data")
+				label img
+				input(type="file", name="UploadFile" id="UploadFile")
+				div(style="width: 32em; height: 8em; display: flex; justify-content: center; align-items: center; margin: 0 auto")
+					img(id="upload_img", src=banner.img, style="max-width: 100%; max-height: 100%")		
+				input(type="hidden" name="banner_id" value=banner.id)
+				button(type="submit", class="btn btn-outline btn-success btn-sm", onclick="if(check()==0){ return false }")上傳
+		.col-lg-6
+			form(action="/admin/banners/update_mobile_img", method="post", enctype="multipart/form-data")
+				label mobile_img
+				input(type="file", name="UploadFileMobile" id="UploadFileMobile")
+				div(style="width: 32em; height: 8em; display: flex; justify-content: center; align-items: center; margin: 0 auto")
+					img(src=banner.mobile_img, style="max-width: 100%; max-height: 100%")		
+				input(type="hidden" name="banner_id" value=banner.id)
+				button(type="submit", class="btn btn-outline btn-success btn-sm", onclick="if(checkMobile()==0){ return false }")上傳
+
+	.row
+		.col-lg-12
+			input(type="button", class="btn btn-info btn-outline", onclick="preview(600)", value="預覽600")
+			input(type="button", class="btn btn-info btn-outline", onclick="preview(400)", value="預覽400")
+
+	div(id="preview" style="border-top: 1px #000 solid; border-bottom: 1px #000 solid; position: absolute; left: 0em; background-color: #fff; width: 100%; margin: 2em 0; background-image: url('"+banner.img+"')")
+		div(id="preview_text", style="position: absolute; width: 100%;")
+
+	script.		
+		var myTextarea = document.getElementById("content")
+		var editor = CodeMirror.fromTextArea(myTextarea, {lineNumbers: true})
+		editor.setSize(600, 300)
+
+		function htmlDecode(input){
+			var doc = new DOMParser().parseFromString(input, "text/html");
+			return doc.documentElement.textContent;
+		}
+		function preview(height) {
+			var txt = editor.getValue();
+			document.querySelector('#preview').style.height = height+"px";
+			document.querySelector('#preview_text').style.top = document.querySelector('#text_top').value+"%";
+			document.querySelector('#preview_text').style.left = document.querySelector('#text_left').value+"%";
+			document.querySelector('#preview_text').innerHTML = txt;
+		}
+		function check() {
+			return document.querySelector('#UploadFile').files.length;
+		}
+		function checkMobile() {
+			return document.querySelector('#UploadFileMobile').files.length;
+		}

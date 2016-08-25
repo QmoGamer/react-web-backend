@@ -1,0 +1,50 @@
+extends layout
+
+block content
+
+	style.
+		label {
+			margin-top: 5px;
+		}
+
+	.row
+		.col-lg-12
+			h1(class="page-header")=title
+
+	.row
+		.col-lg-12
+			- var n = 1
+			each home_ad in home_ads
+				.col-lg-6
+					label 廣告-
+						=home_ad.id
+					form(action="/admin/home_ads/update", method="post", enctype="multipart/form-data", style="margin: 1em")
+						label img
+						input(type="file", name="UploadFile" id="UploadFile")
+						div(style="width: 375px; height: 250px; display: flex; justify-content: center; align-items: center; margin: 1em")
+							img(src=home_ad.img, style="max-width: 100%; max-height: 100%")
+						label url
+						input(type="text", name="url", value=home_ad.url, class="form-control", style="width: 50%")
+						label text
+						textarea(id="content_"+n, name="text", class="form-control")=home_ad.text
+						br
+						input(type="hidden" name="home_ad_id" value=home_ad.id)
+						button(type="submit", class="btn btn-outline btn-success btn-sm")更新
+				=n++
+
+	script.		
+		var myTextarea_1 = document.getElementById("content_1")
+		var editor_1 = CodeMirror.fromTextArea(myTextarea_1, {lineNumbers: true})
+		editor_1.setSize(600, 150)
+
+		var myTextarea_2 = document.getElementById("content_2")
+		var editor_2 = CodeMirror.fromTextArea(myTextarea_2, {lineNumbers: true})
+		editor_2.setSize(600, 150)
+
+		var myTextarea_3 = document.getElementById("content_3")
+		var editor_3 = CodeMirror.fromTextArea(myTextarea_3, {lineNumbers: true})
+		editor_3.setSize(600, 150)
+
+		var myTextarea_4 = document.getElementById("content_4")
+		var editor_4 = CodeMirror.fromTextArea(myTextarea_4, {lineNumbers: true})
+		editor_4.setSize(600, 150)

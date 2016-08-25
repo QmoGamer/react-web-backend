@@ -1,0 +1,153 @@
+extends layout
+
+block content
+
+	.row
+		.col-lg-12
+			h1(class="page-header")=title
+				a(href="/admin/members", class="btn btn-warning") back
+
+	.row
+		.col-lg-4
+			.panel.panel-primary 
+				.panel-heading
+					會員資訊
+				.panel-body
+					.table-responsive
+						table(class="table table-bordered")
+							tbody
+								tr
+									th
+										信箱
+									td
+										=member.email
+								tr
+									th
+										手機號碼
+									td
+										=member.phone
+								tr
+									th
+										生日
+									td
+										=member.birthday
+								tr
+									th
+										中文全名
+									td
+										=member.name
+								tr
+									th
+										英文或暱稱
+									td
+										=member.nickname
+								tr
+									th
+										公司
+									td
+										=member.company_name
+								tr
+									th
+										單位
+									td
+										=member.Institution_option
+								tr
+									th
+										統編
+									td
+										=member.company_id
+								tr
+									th
+										工作地址
+									td
+										=member.City
+										=member.Area
+										=member.company_address
+								tr
+									th
+										辦公室電話
+									td
+										=member.company_phone
+								tr
+									th
+										部門名稱
+									td
+										=member.department
+								tr
+									th
+										職稱
+									td
+										=member.job_title
+								tr
+									th
+										產業類別1
+									td
+										=member.Industries_option
+								tr
+									th
+										產業類別2
+									td
+										=member.Industries2_option
+								tr
+									th
+										產業類別3
+									td
+										=member.Industries3_option
+								tr
+									th
+										消息來源
+									td
+										=member.Source_option
+								tr
+									th
+										是否訂閱電子報
+									td
+										if member.is_enews==1
+											|是
+										else
+											|否
+								tr
+									th
+										推薦人
+									td
+										=member.reference
+		.col-lg-4
+			.panel.panel-green
+				.panel-heading course list
+				.panel-body
+					.table-responsive
+						table(class="table")
+							thead
+								tr
+									th #
+									th name
+							tbody				
+								- var n = 1		
+								each course in courses
+									tr
+										td
+											label
+												=n++
+										td 
+											label 
+												=course.name
+		.col-lg-4
+			.panel.panel-red
+				.panel-heading activity list
+				.panel-body
+					.table-responsive
+						table(class="table")
+							thead
+								tr
+									th #
+									th name
+							tbody				
+								- var n = 1		
+								each activity in activitys
+									tr
+										td
+											label
+												=n++
+										td 
+											label 
+												=activity.name

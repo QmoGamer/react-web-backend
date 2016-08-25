@@ -1,0 +1,84 @@
+extends layout
+
+block content
+
+	style.
+		input[type="text"] {
+			width: 50%;
+		}
+		li {
+			list-style-type: decimal;
+		}
+
+	.row
+		.col-lg-12
+			h1(class="page-header")=article.name
+				a(href="/admin/articles", class="btn btn-warning") back
+
+	.row
+		.col-lg-4
+			form(action="/admin/articles/update", method="post", class="form-group")
+				label 名稱 
+				input(type="text", class="form-control", name="name", value=article.name)
+				label 分類
+				select(class="form-control", name="category", style="width: 50%;")
+					option(value="7" selected)|其它
+					option(value="1" selected=article.category == "1")|第一層主選單
+					option(value="2" selected=article.category == "2")|第二層主選單
+					option(value="3" selected=article.category == "3")|第三層主選單
+					option(value="4" selected=article.category == "4")|Footer選單
+					option(value="5" selected=article.category == "5")|課程用
+					option(value="6" selected=article.category == "6")|活動用	
+				label content (請將程式碼置左[shift+tab]不要留空行, 以免出現跑版)
+				div(style="border: 1px #ccc solid;")
+					textarea(id="content" name="content" class="content")=article.content
+				input(type="hidden" name="article_id" value=article.id)
+				input(type="submit", class="btn btn-success btn-outline" style="margin: 1em", value="更新")
+				input(type="button", class="btn btn-info btn-outline" onclick="preview()" value="預覽")
+		.col-lg-2
+			form(action="/admin/article_anchors/create", method="post", class="form-group", style="display: flex; align-items: center;")
+				label 錨點  
+				input(type="text", name="name", class="form-control")
+				input(type="hidden", name="article_id", value=article.id)
+				input(type="submit", class="btn btn-primary btn-outline btn-sm", value="新增")
+			ul
+				each article_anchor in article_anchors
+					li
+						.form-group(style="display: flex; align-items: center;")
+							a(href="#" + article_anchor.name)=article_anchor.name								
+							a(href="/admin/article_anchors/" + article_anchor.id + "/destroy", class="btn btn-danger btn-outline btn-sm")刪除
+		.col-lg-6
+			form(action="/admin/articles/upload", method="post", enctype="multipart/form-data", class="form-group", style="display: flex;")
+				label 上傳圖片
+				input(type="hidden", name="article_id", value=article.id)
+				input(type="file", name="UploadFile", id="UploadFile")
+				input(type="submit", class="btn btn-success btn-outline btn-sm", name="Upload", value="送出", onclick="if(check()==0){ return false }")
+			ul(style="display: flex; flex-wrap: wrap")
+				each img in imgs
+					li(style="margin-left: 1em")
+						label path : 
+						div(style="color: red")=img.path
+						div(style="width: 200px; height: 200px; display: flex; justify-content: center; align-items: center; margin: 0 auto")
+							img(src=img.path, style="max-width: 100%; max-height: 100%")
+						a(href="/admin/articles/" + article.id + "/img/" + img.id + "/destroy", class="btn btn-danger btn-outline btn-sm")刪除
+
+	div(id='preview' style="border-top: 1px #000 solid; border-bottom: 1px #000 solid; position: absolute; left: 0em; background-color: #fff; width: 100%; margin: 8em 0; z-index: -1;")
+
+	script.		
+		var myTextarea = document.getElementById("content")
+		var editor = CodeMirror.fromTextArea(myTextarea, {lineNumbers: true})
+		editor.setSize(500, 500)
+
+		function htmlDecode(input){
+			var doc = new DOMParser().parseFromString(input, "text/html");
+			return doc.documentElement.textContent;
+		}
+		function preview() {
+			var txt = editor.getValue();
+			document.querySelector('#preview').innerHTML = txt;
+		}
+		function check() {
+			return document.querySelector('#UploadFile').files.length;
+		}
+
+		preview()

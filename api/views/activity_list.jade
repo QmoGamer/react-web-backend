@@ -1,0 +1,91 @@
+extends layout
+
+block content
+
+	link(rel='stylesheet', href='/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css')
+	link(rel='stylesheet', href='/bower_components/datatables-responsive/css/responsive.dataTables.scss')
+
+	<!-- Custom CSS -->
+	link(rel='stylesheet', href='/dist/css/sb-admin-2.css')
+
+	script(type='text/javascript' src='/bower_components/datatables/media/js/jquery.dataTables.min.js')
+	script(type='text/javascript' src='/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js')
+
+	<!-- Custom Theme JavaScript -->
+	script(type='text/javascript' src='/dist/js/sb-admin-2.js')
+
+	.row
+		.col-lg-12
+			h1(class="page-header")=title
+
+	.row
+		.col-lg-12
+			form(action="/admin/activitys/create", method="post", class="form-group alert alert-info", style="display: flex; align-items: center;")
+				label name
+				input(type="text", class="form-control", name="name")
+				label article
+				select(name="article_id", class="form-control")
+					option(value=0)請選擇  
+					each article in articles
+						option(value=article.id) #{article.name}
+				label banner
+				select(name="banner_id", class="form-control")
+					option(value=0)請選擇  
+					each banner in banners
+						option(value=banner.id) #{banner.name}
+				label menu
+				select(name="menu_id", class="form-control")
+					option(value=0)請選擇  
+					each menu in menus
+						option(value=menu.id) #{menu.name}
+				br
+				button(type="submit", class="btn btn-outline btn-primary btn-sm")新增
+
+	.row
+		.col-lg-12
+			ul(style="list-style: none; padding: 0")
+				each activity in activitys
+					li
+						.panel.panel-default
+							.panel-heading
+								h4(class="panel-title")
+									a(data-toggle="collapse", href="#collapse_"+activity.id, class="btn btn-outline btn-info btn-sm", style="float: left;")展開								
+									form(action="/admin/activitys/update", method="post", class="form-group", style="display: flex; align-items: center; margin-bottom: 0;")
+										input(type="text", class="form-control", name="name", value=activity.name)										
+										label article
+										select(name="article_id", class="form-control")
+											option(value=0)請選擇  
+											each article in articles
+												option(value=article.id selected=activity.ArticleId==article.id) #{article.name}
+										label banner
+										select(name="banner_id", class="form-control")
+											option(value=0)請選擇  
+											each banner in banners
+												option(value=banner.id selected=activity.BannerId==banner.id) #{banner.name}
+										label menu
+										select(name="menu_id", class="form-control")
+											option(value=0)請選擇  
+											each menu in menus
+												option(value=menu.id selected=activity.MenuId==menu.id) #{menu.name}
+										input(type="hidden", name="activity_id", value=activity.id)		
+										button(type="submit", class="btn btn-outline btn-success btn-sm")更新
+										a(href="/admin/activitys/" + activity.id + "/destroy", class="btn btn-danger btn-outline btn-sm", onclick="return confirm('確定刪除嗎?')")刪除
+							.panel-collapse.collapse(id="collapse_"+activity.id)
+								.panel-body
+									form(action="/admin/activitys/activity_details/create", method="post", class="form-group", style="display: flex; align-items: center;")
+										|&nbsp&nbsp
+										label 名稱
+										input(type="text", class="form-control", name="name")										
+										input(type="hidden", name="activity_id" value=activity.id)											
+										button(type="submit", class="btn btn-outline btn-primary btn-sm")新增
+									ul(style="list-style: none; padding: 0")
+										each activity_detail in activity.Activity_Details
+											li												
+												.form-group(style="display: flex; align-items: center;")
+													|&nbsp&nbsp
+													label 名稱
+													.form-control(style="margin: 0 1em; box-shadow: none; border: none; font-weight: bold")
+														=activity_detail.name
+													input(type="hidden", name="activity_detail_id", value=activity_detail.id)
+													a(href="/admin/activitys/activity_details/"+activity_detail.id, class="btn btn-outline btn-success btn-sm")編輯
+													a(href="/admin/activitys/activity_details/"+activity_detail.id+"/destroy", class="btn btn-danger btn-outline btn-sm", onclick="return confirm('確定刪除嗎?')")刪除

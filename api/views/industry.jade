@@ -1,0 +1,54 @@
+extends layout
+
+block content
+
+	style.
+		label {
+			margin-top: 5px;
+		}
+
+	.row
+		.col-lg-12
+			h1(class="page-header")=title
+
+	.row
+		.col-lg-3
+			form(action="/admin/industrys/create", method="post", class="form-group alert alert-info", style="display: flex; align-items: center;")
+				label option
+				input(type="text", class="form-control", name="option")				
+				br
+				input(type="hidden", name="industry_id", value="0")
+				button(type="submit", class="btn btn-outline btn-primary btn-sm")新增			
+			ul
+				each industry in industrys
+					if industry.IndustryId == null
+						li
+							label
+								span(style="color: #E94F37")=industry.option
+							a(href="/admin/industrys/"+industry.id+"/destroy", class="btn btn-danger btn-sm", style="margin-left: 2em")刪除
+							form(action="/admin/industrys/create", method="post", class="form-group", style="display: flex; align-items: center;")
+								label option
+								input(type="text", class="form-control", name="option")				
+								br
+								input(type="hidden", name="industry_id", value=industry.id)
+								button(type="submit", class="btn btn-outline btn-primary btn-sm")新增
+							ul
+								each industry_second in industrys
+									if industry_second.IndustryId == industry.id
+										li
+											label
+												span(style="color: #44BBA4")=industry_second.option
+											a(href="/admin/industrys/"+industry_second.id+"/destroy", class="btn btn-danger btn-sm", style="margin-left: 2em")刪除
+											form(action="/admin/industrys/create", method="post", class="form-group", style="display: flex; align-items: center;")
+												label option
+												input(type="text", class="form-control", name="option")				
+												br
+												input(type="hidden", name="industry_id", value=industry_second.id)
+												button(type="submit", class="btn btn-outline btn-primary btn-sm")新增
+											ul
+												each industry_third in industrys
+													if industry_third.IndustryId == industry_second.id
+														li
+															label
+																span(style="color: #3F88C5")=industry_third.option
+															a(href="/admin/industrys/"+industry_third.id+"/destroy", class="btn btn-danger btn-sm", style="margin-left: 2em")刪除
