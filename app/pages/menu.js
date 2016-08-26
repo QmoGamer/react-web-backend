@@ -319,8 +319,8 @@ var MenuTop = React.createClass({
 			<div className='pure-menu pure-menu-fixed pure-menu-horizontal' style={{background:'white',textAlign:'left', width: '100%'}}>
 				<div className="html_width_space flex_center_center">
 					<div style={{display: "flex", alignItems: "center"}}>
-						<Link to="/" style={{"marginLeft": "1em"}}><img style={{padding: "0em"}} className='pure-menu-heading' href="#" src="/img/logo.jpg" /></Link>
-						<div style={{marginTop: "16px", letterSpace: "1px", color: "#585858"}}>大塚資訊科技</div>
+						<Link to="/" style={{"marginLeft": "1em"}}><img style={{padding: "0em"}} className='pure-menu-heading' href="#" src="http://placehold.it/150x48" /></Link>
+						<div style={{marginTop: "16px", letterSpace: "1px", color: "#585858"}}>SLOGAN</div>
 					</div>
 					<li className="pure-menu-item"  style={{right: "0em"}}>
 						<Link className="language_link" to="/member" style={{display: "inline-block"}}><img src={member_icon} width="24px" /></Link>
